@@ -11,3 +11,23 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
+        n = len(height)
+        max_area = 0
+        start = 0
+        end = n -1
+        # 采用双指针解法，保证保留较长的那一边，然后寻找更高的较短的一边
+        while start < end:
+            cur_area = min(height[start],height[end]) * (end-start)
+            max_area = max(max_area,cur_area)
+            if height[start] < height[end]:
+                start += 1
+            else:
+                end -= 1
+        return max_area
+
+
+
+if __name__ == '__main__':
+    height = [1,8,6,2,5,4,8,3,7]
+    res = Solution().maxArea(height)
+    print(res)
